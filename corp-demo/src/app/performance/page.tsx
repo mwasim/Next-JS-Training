@@ -1,7 +1,13 @@
-import React from "react";
+import Hero from "@/components/hero";
 
 const PerformancePage = () => {
-  return <div>Performance Page!</div>;
+  return (
+    <Hero
+      imgPath="/images/performance.jpg"
+      imgAlt="welding"
+      title="We serve high performance applications!"
+    />
+  );
 };
 
 export default PerformancePage;

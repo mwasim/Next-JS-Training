@@ -9,7 +9,7 @@ interface HeroProps {
 
 const Hero = (props: HeroProps) => {
   return (
-    <div className=" relative h-screen">
+    <div className="relative h-screen">
       <div className="absolute -z-10 inset-0">
         <Image
           src={props.imgPath}
