@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
+import Header from "@/components/header"; //@ symbol is shortcut to go to the src directory - Absolute Path
 
 const inter = Inter({ subsets: ["latin"] });
 
