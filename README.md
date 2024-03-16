@@ -1,1 +1,1 @@
-# Next-JS_Training
+# Next-JS-Training
