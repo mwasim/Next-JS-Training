@@ -1,9 +1,13 @@
 ## Skills & Tools Used in this Project
 
+- React.js
+  https://react.dev/
 - NEXT.js:
   https://nextjs.org/
 - JavaScript:
   https://developer.mozilla.org/en-US/docs/Web/javascript
+- JSX
+  https://react.dev/learn/writing-markup-with-jsx
 - ESLint:
   https://eslint.org/
 - TypeScript:
