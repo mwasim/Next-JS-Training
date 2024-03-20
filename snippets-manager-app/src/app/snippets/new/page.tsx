@@ -1,8 +1,36 @@
 import React from "react";
+import { db } from "@/db";
+import { redirect } from "next/navigation";
 
 const SnippetCreatePage = () => {
+  async function createSnippet(formData: FormData) {
+    //TODO: This needs to be a server action
+    `use server`;
+
+    //TODO: Check the user input and ensure it's valid
+    const title = formData.get(`title`) as string;
+    const code = formData.get(`code`) as string;
+
+    //TODO: Create a new record in the database
+    const snippet = await db.snippet.create({
+      data: {
+        // title: title,
+        // code: code
+
+        //As key/values are identitcal we can shorten them down as below,
+        title,
+        code,
+      },
+    });
+
+    console.log(snippet);
+
+    //TODO: Redirect the user back to the root route
+    redirect(`/`); //NEXT function to forcibly redirect user to another route, it's its' home screen
+  }
+
   return (
-    <form>
+    <form action={createSnippet}>
       <h3 className="font-bold m-3">Create a Snippet</h3>
       <div className="flex flex-col gap-4">
         <div className="flex gap-4">
