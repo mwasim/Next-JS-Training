@@ -4,14 +4,14 @@ import { redirect } from "next/navigation";
 
 const SnippetCreatePage = () => {
   async function createSnippet(formData: FormData) {
-    //TODO: This needs to be a server action
-    `use server`;
+    //1. This needs to be a server action
+    "use server";
 
-    //TODO: Check the user input and ensure it's valid
+    //2. Check the user input and ensure it's valid
     const title = formData.get(`title`) as string;
     const code = formData.get(`code`) as string;
 
-    //TODO: Create a new record in the database
+    //3. Create a new record in the database
     const snippet = await db.snippet.create({
       data: {
         // title: title,
@@ -25,7 +25,7 @@ const SnippetCreatePage = () => {
 
     console.log(snippet);
 
-    //TODO: Redirect the user back to the root route
+    //4. Redirect the user back to the root route
     redirect(`/`); //NEXT function to forcibly redirect user to another route, it's its' home screen
   }
 
