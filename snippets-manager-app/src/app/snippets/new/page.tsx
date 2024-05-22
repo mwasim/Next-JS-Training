@@ -1,36 +1,17 @@
+"use client";
+
 import React from "react";
-import { db } from "@/db";
-import { redirect } from "next/navigation";
+import * as actions from "@/actions";
+import { useFormState } from "react-dom";
 
 const SnippetCreatePage = () => {
-  async function createSnippet(formData: FormData) {
-    //1. This needs to be a server action
-    "use server";
-
-    //2. Check the user input and ensure it's valid
-    const title = formData.get(`title`) as string;
-    const code = formData.get(`code`) as string;
-
-    //3. Create a new record in the database
-    const snippet = await db.snippet.create({
-      data: {
-        // title: title,
-        // code: code
-
-        //As key/values are identitcal we can shorten them down as below,
-        title,
-        code,
-      },
-    });
-
-    console.log(snippet);
-
-    //4. Redirect the user back to the root route
-    redirect(`/`); //NEXT function to forcibly redirect user to another route, it's its' home screen
-  }
+  const [formState, updatedVerOfCreateSnippetAction] = useFormState(
+    actions.createSnippet,
+    { message: "" }
+  );
 
   return (
-    <form action={createSnippet}>
+    <form action={updatedVerOfCreateSnippetAction}>
       <h3 className="font-bold m-3">Create a Snippet</h3>
       <div className="flex flex-col gap-4">
         <div className="flex gap-4">
@@ -54,6 +35,12 @@ const SnippetCreatePage = () => {
             id="code"
           />
         </div>
+
+        {formState.message ? (
+          <div className="my-2 p-2 bg-red-200 border rounded border-red-400">
+            {formState.message}
+          </div>
+        ) : null}
 
         <button type="submit" className="rounded p-2 bg-blue-200">
           Create
