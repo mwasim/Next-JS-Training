@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { db } from "@/db";
 import Link from "next/link";
 import * as actions from "@/actions";
-import { act } from "react-dom/test-utils";
 
 interface SnippetShowPageProps {
   params: {
@@ -10,7 +9,7 @@ interface SnippetShowPageProps {
   };
 }
 
-const SnippetShowPage = async (props: SnippetShowPageProps) => {
+export default async function SnippetShowPage(props: SnippetShowPageProps) {
   //console.log(props);
 
   //Add artificial delay to test the loading.tsx page
@@ -49,6 +48,16 @@ const SnippetShowPage = async (props: SnippetShowPageProps) => {
       </pre>
     </div>
   );
-};
+}
 
-export default SnippetShowPage;
+export async function generateStaticParams() {
+  const snippets = await db.snippet.findMany();
+
+  return snippets.map((snippet) => {
+    return {
+      id: snippet.id.toString(),
+    };
+  });
+}
+
+//export default SnippetShowPage;

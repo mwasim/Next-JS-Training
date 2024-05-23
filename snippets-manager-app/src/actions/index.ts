@@ -2,6 +2,7 @@
 
 import { db } from "@/db";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export async function editSnippet(id: number, code: string) {
   console.log(id, code);
@@ -10,6 +11,7 @@ export async function editSnippet(id: number, code: string) {
     data: { code },
   });
 
+  revalidatePath(`/snippets/${id}`);
   redirect(`/snippets/${id}`);
 }
 
@@ -18,6 +20,7 @@ export const deleteSnippet = async (id: number) => {
     where: { id },
   });
 
+  revalidatePath("/"); //don't cache, purge cache on demand, or revalidate this path.
   redirect("/");
 };
 
@@ -71,6 +74,7 @@ export async function createSnippet(
   }
   //console.log(snippet);
 
+  revalidatePath("/"); //don't cache, purge cache on demand, or revalidate this path.
   //4. Redirect the user back to the root route
   //Don't put the redirect statement inside the try block as it'd throw and Error
   redirect(`/`); //NEXT function to forcibly redirect user to another route, it's its' home screen
